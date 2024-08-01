@@ -74,7 +74,7 @@ class AutomationTool:
             os.makedirs(bbscope_dir)
 
         # Run bbscope command and save output to bounties.txt
-        bbscope_cmd = f"bbscope h1 -t iwQO6Yb28f/tQuYz6OQO3ZAcQ2ECAYo+K4zflnxLehU= -u jojo-sama -b -a -o t > {bbscope_dir}/bounties.txt"
+        bbscope_cmd = f"bbscope h1 -t token -u user -b -a -o t > {bbscope_dir}/bounties.txt"
         os.system(bbscope_cmd)
 
         # Read bounties.txt and separate scopes into all_scopes and wildcard_scopes
@@ -169,7 +169,7 @@ class AutomationTool:
 
     def cors_finding(self, target):
         print(Fore.YELLOW + "[+] CORS Phase Running..." + Style.RESET_ALL)
-        os.system(f"python3 /root/tools/Corsy/corsy.py -i {target}-subdomains_alive.txt -t 10 --headers \"User-Agent: GoogleBot\nCookie: SESSION=Hacked\"")
+        os.system(f"python3 directory/Corsy/corsy.py -i {target}-subdomains_alive.txt -t 10 --headers \"User-Agent: GoogleBot\nCookie: SESSION=Hacked\"")
 
     def vulnerability_scan(self, target):
         print(Fore.YELLOW + "[+] Nuclei scan phase running..." + Style.RESET_ALL)
@@ -180,7 +180,7 @@ class AutomationTool:
         os.system(f"cat {target}-subdomain.txt | gau | urldedupe | gf sqli >sql.txt; sqlmap -m sql.txt --batch --dbs -threads=5 --random-agent --risk=3 --level=5     --tamper=space2comment -v 3 | tee -a sqli.txt")
         os.system(f"paramspider -l {target}-subdomains_alive.txt")
         os.system(f"cat results/* | sed '/FUZZ//g' > reports/final.txt")
-        os.system(f"python3 /root/tools/customBsqli/lostsec.py -l final.txt -p payloads/xor.txt -t 5")
+        os.system(f"python3 directory/customBsqli/lostsec.py -l final.txt -p payloads/xor.txt -t 5")
 
     def stop(self):
         self._stop_event.set()
