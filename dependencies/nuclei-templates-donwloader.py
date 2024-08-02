@@ -2,6 +2,10 @@ import subprocess
 import git
 import os
 
+TOOLS_DIR = os.path.expanduser('~') + '/nuclei-templates'
+if not os.path.exists(TOOLS_DIR):
+    os.makedirs(TOOLS_DIR)
+
 # Define the list of URLs
 urls = [
     "https://github.com/pikpikcu/nuclei-templates",
