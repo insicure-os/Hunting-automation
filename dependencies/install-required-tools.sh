@@ -52,17 +52,6 @@ else
     echo "katana is already installed"
 fi
 
-# dirsearch
-if [ ! -d "/root/tools/dirsearch" ]; then
-    echo "Installing dirsearch..."
-    git clone https://github.com/maurosoria/dirsearch /root/tools/dirsearch
-    cd /root/tools/dirsearch
-    pip3 install -r requirements.txt
-    python3 setup.py install
-else
-    echo "dirsearch is already installed"
-fi
-
 # gf
 if ! command -v gf &> /dev/null; then
     echo "Installing gf..."
@@ -90,7 +79,7 @@ else
 fi
 
 # corsy
-if ! command -v corsy &> /dev/null; then
+if [ ! -d "/root/tools/Corsy" ]; then
     echo "Installing corsy..."
     pip3 install requests
     git clone https://github.com/s0md3v/Corsy /root/tools/Corsy
@@ -98,6 +87,17 @@ if ! command -v corsy &> /dev/null; then
     pip3 install -r requirements.txt
 else
     echo "corsy is already installed"
+fi
+
+# dirsearch
+if [ ! -d "/root/tools/dirsearch" ]; then
+    echo "Installing dirsearch..."
+    git clone https://github.com/maurosoria/dirsearch /root/tools/dirsearch
+    cd /root/tools/dirsearch
+    pip3 install -r requirements.txt
+    python3 setup.py install
+else
+    echo "dirsearch is already installed"
 fi
 
 # gau
