@@ -70,31 +70,31 @@ else
 fi
 
 # paramspider
-if [ ! -d "/root/tools/paramspider" ]; then
+if [ ! -d "$HOME/tools/paramspider" ]; then
     echo "Installing paramspider..."
-    git clone https://github.com/devanshbatham/paramspider /root/tools/paramspider
-    cd /root/tools/paramspider
+    git clone https://github.com/devanshbatham/paramspider $HOME/tools/paramspider
+    cd $HOME/tools/paramspider
     pip3 install .
 else
     echo "paramspider is already installed"
 fi
 
 # corsy
-if [ ! -d "/root/tools/Corsy" ]; then
+if [ ! -d "$HOME/tools/Corsy" ]; then
     echo "Installing corsy..."
     pip3 install requests
-    git clone https://github.com/s0md3v/Corsy /root/tools/Corsy
-    cd /root/tools/Corsy
+    git clone https://github.com/s0md3v/Corsy $HOME/tools/Corsy
+    cd $HOME/tools/Corsy
     pip3 install -r requirements.txt
 else
     echo "corsy is already installed"
 fi
 
 # dirsearch
-if [ ! -d "/root/tools/dirsearch" ]; then
+if [ ! -d "$HOME/tools/dirsearch" ]; then
     echo "Installing dirsearch..."
-    git clone https://github.com/maurosoria/dirsearch /root/tools/dirsearch
-    cd /root/tools/dirsearch
+    git clone https://github.com/maurosoria/dirsearch $HOME/tools/dirsearch
+    cd $HOME/tools/dirsearch
     pip3 install -r requirements.txt
     python3 setup.py install
 else
@@ -110,10 +110,10 @@ else
 fi
 
 # urldedupe
-if [ ! -d "/root/tools/urldedupe" ]; then
+if [ ! -d "$HOME/tools/urldedupe" ]; then
     echo "Installing urldedupe..."
-    git clone https://github.com/ameenmaali/urldedupe.git /root/tools/urldedupe
-    cd /root/tools/urldedupe
+    git clone https://github.com/ameenmaali/urldedupe.git $HOME/tools/urldedupe
+    cd $HOME/tools/urldedupe
     cmake .
     make
 else
