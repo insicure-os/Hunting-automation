@@ -10,7 +10,26 @@ Hunting.py is a simple Python automation tool designed to make bug bounty huntin
 
 ### Getting Started
 
-To get started, make sure to download all the necessary dependencies.
+To get started, follow these steps:
+
+1. Clone the repository: 
+```bash
+git clone https://github.com/insicure-os/Hunting-automation
+```
+2. Change into the repository directory: 
+```bash
+cd Hunting-automation
+```
+3. Make the setup script executable: 
+```bash
+chmod +x setup.sh
+```
+4. Run the setup script: 
+```bash
+bash setup.sh
+```
+
+This will install all the necessary dependencies and set up the tool for use.
 
 ### Future Development
 
