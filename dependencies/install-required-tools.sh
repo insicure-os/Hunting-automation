@@ -136,9 +136,6 @@ else
 fi
 
 # Copy binaries to /usr/bin
-echo "Copying binaries
-
-# Copy binaries to /usr/bin
 echo "Copying binaries to /usr/bin..."
 sudo cp /root/go/bin/* /usr/bin/
 
