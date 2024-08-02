@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Update package list and install dependencies
-apt update
-apt install -y git cmake python3-pip
+sudo apt update
+sudo apt install -y git cmake python3-pip
 
 # Install Go if not already installed
 if ! command -v go &> /dev/null; then
-    apt install -y golang-go
+    sudo apt install -y golang-go
 fi
 
 # Create a directory for the tools under the current user's home directory
@@ -138,8 +138,8 @@ fi
 
 # Copy binaries to /usr/bin
 echo "Copying binaries to /usr/bin..."
-cp $HOME/go/bin/ * /usr/bin/
+sudo cp $HOME/go/bin/ * /usr/bin/
 
 # mv custom sqli tool to desire directory
 echo "Moving CustomBsqli to desire directory"
-mv customBsqli $HOME/tools
+sudo mv customBsqli $HOME/tools
