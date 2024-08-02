@@ -9,8 +9,9 @@ if ! command -v go &> /dev/null; then
     sudo apt install -y golang-go
 fi
 
-# Create a directory for the tools
-mkdir -p /root/tools
+# Create a directory for the tools under the current user's home directory
+TOOLS_DIR=$HOME/tools
+mkdir -p $TOOLS_DIR
 
 # bbscope
 if ! command -v bbscope &> /dev/null; then
