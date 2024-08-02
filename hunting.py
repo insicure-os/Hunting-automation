@@ -139,7 +139,7 @@ class AutomationTool:
             f.write("\n".join(domains_and_subdomains))
 
         os.system(f"subfinder -dL {bbscope_dir}/final_domains_and_subdomains.txt -all -recursive > {bbscope_dir}/large_subdomains.txt")
-        os.system(f"nuclei -l {bbscope_dir}/large_subdomains.txt -t /root/nuclei-templates --tags")
+        os.system(f"nuclei -l {bbscope_dir}/large_subdomains.txt -t /root/nuclei-templates ")
 
     def enum_subdomains(self, target):
         print(Fore.YELLOW + "[+] Enumeration Phase Running..." + Style.RESET_ALL)
@@ -169,7 +169,7 @@ class AutomationTool:
 
     def cors_finding(self, target):
         print(Fore.YELLOW + "[+] CORS Phase Running..." + Style.RESET_ALL)
-        os.system(f"python3 directory/Corsy/corsy.py -i {target}-subdomains_alive.txt -t 10 --headers \"User-Agent: GoogleBot\nCookie: SESSION=Hacked\"")
+        os.system(f"python3 /root/tools/Corsy/corsy.py -i {target}-subdomains_alive.txt -t 10 --headers \"User-Agent: GoogleBot\nCookie: SESSION=Hacked\"")
 
     def vulnerability_scan(self, target):
         print(Fore.YELLOW + "[+] Nuclei scan phase running..." + Style.RESET_ALL)
@@ -180,7 +180,7 @@ class AutomationTool:
         os.system(f"cat {target}-subdomain.txt | gau | urldedupe | gf sqli >sql.txt; sqlmap -m sql.txt --batch --dbs -threads=5 --random-agent --risk=3 --level=5     --tamper=space2comment -v 3 | tee -a sqli.txt")
         os.system(f"paramspider -l {target}-subdomains_alive.txt")
         os.system(f"cat results/* | sed '/FUZZ//g' > reports/final.txt")
-        os.system(f"python3 directory/customBsqli/lostsec.py -l final.txt -p payloads/xor.txt -t 5")
+        os.system(f"python3 /root/tools/customBsqli/lostsec.py -l final.txt -p payloads/xor.txt -t 5")
 
     def stop(self):
         self._stop_event.set()
