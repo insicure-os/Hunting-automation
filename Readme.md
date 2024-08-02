@@ -1,13 +1,28 @@
 # Hunting.py
+================
 
-- it's a simple python automation for bug bounty simple life
-- For downloading all the necessary watch the dependencies
+A Simple Python Automation for Bug Bounty or PT
+-----------------------------------------
 
-- really soon docker implementation for less resources usage
+### Description
 
-## IMPORTANT
+Hunting.py is a simple Python automation tool designed to make bug bounty hunting easier and more efficient.
 
-* make sure to update the tools path, and all the stuff that is related to your personal instance!
+### Getting Started
 
+To get started, make sure to download all the necessary dependencies.
 
-(don't worry guys the token and user in the commit of the main file is a bait lol)
+### Future Development
+
+* Docker implementation is coming soon to reduce resource usage!
+
+## Important Notes
+---------------
+
+### Configuration
+
+* **Important:** Make sure to update the tools path and all related settings to match your personal instance.
+
+### Security
+
+* Don't worry, the token and user in the commit of the main file are just a bait!
