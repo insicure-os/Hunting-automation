@@ -9,7 +9,7 @@ echo "Required tools installed successfully!"
 
 # Step 2: Install Python dependencies
 echo "Installing Python dependencies..."
-python3 -m pip install -r $HOME/Hunting-automation/dependencies/requirements.txt
+pip3 install -r $HOME/Hunting-automation/dependencies/requirements.txt
 echo "Python dependencies installed successfully!"
 
 # Step 3: Download Nuclei templates
