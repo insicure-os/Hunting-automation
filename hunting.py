@@ -165,7 +165,7 @@ class AutomationTool:
         with open(f"{target}-subdomains_alive.txt", "r") as f:
             for line in f.readlines():
                 subdomain = line.strip()
-                os.system(f"screen -dmS dirsearch-{subdomain.split('://')[-1]} bash -c \"{TOOLS_DIR}/dirsearch/dirsearch.py -u {subdomain} -e conf,config,bak,backup,swp,old,    db,sql,asp,aspx,aspx~,asp~,py,py~,rb,rb~,php,php~,bak,bkp,cache,cgi,conf,csv,html,inc,jar,js,json,jsp,jsp~,lock,log,rar,old,sql,sql.gz,http://sql.zip,sql.tar.    gz,sql~,swp,swp~,tar,tar.bz2,tar.gz,txt,wadl,zip,.log,.xml,.js.,.json -o dirsearch-{subdomain.split('://')[-1]}.txt; exec bash\"")
+                os.system(f"screen -dmS dirsearch-{subdomain.split('://')[-1]} bash -c \"{self.TOOLS_DIR}/dirsearch/dirsearch.py -u {subdomain} -e conf,config,bak,backup,swp,old,    db,sql,asp,aspx,aspx~,asp~,py,py~,rb,rb~,php,php~,bak,bkp,cache,cgi,conf,csv,html,inc,jar,js,json,jsp,jsp~,lock,log,rar,old,sql,sql.gz,http://sql.zip,sql.tar.    gz,sql~,swp,swp~,tar,tar.bz2,tar.gz,txt,wadl,zip,.log,.xml,.js.,.json -o dirsearch-{subdomain.split('://')[-1]}.txt; exec bash\"")
 
     def xss_finding(self, target):
         print(Fore.YELLOW + "[+] XSS finder phase running..." + Style.RESET_ALL)
@@ -179,7 +179,7 @@ class AutomationTool:
 
     def cors_finding(self, target):
         print(Fore.YELLOW + "[+] CORS Phase Running..." + Style.RESET_ALL)
-        os.system(f"python3 {TOOLS_DIR}/Corsy/corsy.py -i {target}-subdomains_alive.txt -t 10 --headers \"User-Agent: GoogleBot\nCookie: SESSION=Hacked\"")
+        os.system(f"python3 {self.TOOLS_DIR}/Corsy/corsy.py -i {target}-subdomains_alive.txt -t 10 --headers \"User-Agent: GoogleBot\nCookie: SESSION=Hacked\"")
 
     def vulnerability_scan(self, target):
         print(Fore.YELLOW + "[+] Nuclei scan phase running..." + Style.RESET_ALL)
@@ -190,7 +190,7 @@ class AutomationTool:
         os.system(f"cat {target}-subdomain.txt | gau | urldedupe | gf sqli >sql.txt; sqlmap -m sql.txt --batch --dbs -threads=5 --random-agent --risk=3 --level=5     --tamper=space2comment -v 3 | tee -a sqli.txt")
         os.system(f"paramspider -l {target}-subdomains_alive.txt")
         os.system(f"cat results/* | sed '/FUZZ//g' > reports/final.txt")
-        os.system(f"python3 {TOOLS_DIR}/customBsqli/lostsec.py -l final.txt -p payloads/xor.txt -t 5")
+        os.system(f"python3 {self.TOOLS_DIR}/customBsqli/lostsec.py -l final.txt -p payloads/xor.txt -t 5")
 
     def stop(self):
         self._stop_event.set()
